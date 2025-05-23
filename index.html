@@ -1,0 +1,808 @@
+<!DOCTYPE HTML>
+<html lang="zh">
+<head>
+    <title data-translate="company_name"> Button Factory He Sheng</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="合盛钮扣厂-专业钮扣制造商" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/about.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 主题颜色变量 */
+            --bg-primary: #ffffff;
+            --bg-secondary: rgba(255, 255, 255, 0.2);
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --hover-bg: rgba(0, 0, 0, 0.05);
+            --nav-shadow: rgba(0, 0, 0, 0.1);
+            --hero-overlay: rgba(0, 0, 0, 0.4);
+            --card-bg: #ffffff;
+            --footer-bg: #f5f5f5;
+            --link-color: #2A85FF;
+            --section-title: #333333;
+            --section-subtitle: #666666;
+            --gallery-text: #333333;
+            --gallery-hover: rgba(0, 0, 0, 0.7);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --hover-bg: rgba(255, 255, 255, 0.1);
+            --nav-shadow: rgba(0, 0, 0, 0.2);
+            --hero-overlay: rgba(0, 0, 0, 0.6);
+            --card-bg: #2a2a2a;
+            --footer-bg: #222222;
+            --link-color: #66a9ff;
+            --section-title: #ffffff;
+            --section-subtitle: #cccccc;
+            --gallery-text: #ffffff;
+            --gallery-hover: rgba(0, 0, 0, 0.8);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* 右上角控制按钮容器样式 */
+        .top-right-controls {
+            position: fixed; /* 或者 absolute，取决于是否希望它随页面滚动 */
+            top: 20px;
+            right: 20px;
+            z-index: 1001; /* 比导航栏高一点 */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 调整原 #languageToggle 和 .theme-switch-wrapper 的外边距 (如果需要) */
+        .top-right-controls #languageToggle {
+            margin-left: 0; /* 移除之前在导航栏中可能有的左边距 */
+        }
+
+        .top-right-controls .theme-switch-wrapper {
+            margin-left: 0; /* 移除之前在导航栏中可能有的左边距 */
+            /* background: transparent; /* 如果不希望它有导航栏那样的背景 */
+            /* border: none; */
+        }
+
+        /* 主题切换按钮样式 */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            padding: 8px;
+            border-radius: 100px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-switch {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        .theme-switch-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+        }
+
+        .theme-switch-slider {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: var(--bg-primary);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px var(--nav-shadow);
+            left: -2px;
+        }
+
+        [data-theme="dark"] .theme-switch-slider {
+            transform: translateX(28px);
+        }
+
+        /* 现代化导航栏样式 */
+        .main-nav {
+            background: var(--bg-secondary);
+            padding: 12px 30px;
+            position: fixed;
+            width: 90%;
+            max-width: 1200px;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* .nav-container 和 .nav-links 的主要布局样式移至 nav.css */
+        /* 如果 nav.css 中已包含，以下可注释或删除 */
+        /* .nav-container {
+            display: flex;
+            align-items: center;
+            width: 100%; 
+        }
+
+        .nav-links {
+            display: flex;
+            flex-grow: 1; 
+            justify-content: space-between; 
+            align-items: center;
+        } */
+
+        .nav-item {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 100px;
+        }
+
+        .nav-item:hover {
+            background: var(--hover-bg);
+        }
+
+        .nav-item.active {
+            background: var(--hover-bg);
+        }
+
+        /* 英文模式下导航项字体调整 */
+        .nav-item.lang-en-nav {
+            font-size: 14px; /* 或者尝试 13px / 0.85em 等 */
+            padding: 8px 10px; /* 减小左右内边距，例如从16px减到10px */
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 8px 16px;
+        }
+
+        #languageToggle {
+            border: 1px solid var(--border-color);
+            background: transparent;
+            padding: 8px 16px;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+            margin-left: 5px;
+        }
+
+        #languageToggle:hover {
+            background: var(--hover-bg);
+        }
+
+        .get-started-btn {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .get-started-btn::after {
+            content: "→";
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .get-started-btn:hover {
+            background: #000;
+            transform: translateY(-1px);
+        }
+
+        /* 主要内容区域样式 */
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--hero-overlay);
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+        }
+
+        .hero-description {
+            font-size: 24px;
+            margin-bottom: 32px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-description {
+                font-size: 18px;
+            }
+
+            .slide-caption h2 {
+                font-size: 32px;
+            }
+
+            .slide-caption p {
+                font-size: 16px;
+            }
+        }
+
+        /* 区域标题样式更新 */
+        .section-title {
+            color: var(--section-title);
+        }
+
+        .section-subtitle {
+            color: var(--section-subtitle);
+        }
+
+        /* 图片卡片样式更新 */
+        .gallery-item {
+            background: var(--card-bg);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item .item-content {
+            background: var(--card-bg);
+            color: var(--gallery-text);
+        }
+
+        .gallery-item:hover .item-content {
+            background: var(--gallery-hover);
+            color: #ffffff;
+        }
+
+        .gallery-item h3 {
+            color: var(--gallery-text);
+        }
+
+        .gallery-item p {
+            color: var(--text-secondary);
+        }
+
+        .gallery-item:hover h3,
+        .gallery-item:hover p {
+            color: #ffffff;
+        }
+
+        /* 按钮样式更新 */
+        .more-btn {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .more-btn:hover {
+            background: var(--hover-bg);
+        }
+
+        /* 页脚样式更新 */
+        .site-footer {
+            background: var(--footer-bg);
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .footer-section h3,
+        [data-theme="dark"] .footer-section a,
+        [data-theme="dark"] .company-info p,
+        [data-theme="dark"] .copyright,
+        [data-theme="dark"] .payment-methods span {
+            color: #ffffff;
+        }
+
+        [data-theme="dark"] .footer-section a:hover {
+            color: #cccccc;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--section-title);
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--link-color);
+        }
+
+        .company-info p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .newsletter-form input {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="dark"] .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .subscribe-btn {
+            padding: 8px 16px;
+            background: var(--link-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .subscribe-btn:hover {
+            opacity: 0.9;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .payment-methods {
+            margin-bottom: 10px;
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 右上角控制按钮容器 -->
+    <div class="top-right-controls">
+        <button id="languageToggle">中文 | EN</button>
+        <div class="theme-switch-wrapper">
+            <div class="theme-switch">
+                <div class="theme-switch-icon">☀️</div>
+                <div class="theme-switch-icon">🌙</div>
+                <div class="theme-switch-slider"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 现代化导航栏 -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <!-- Logo 已移除 -->
+            <!-- <a href="index.html" class="logo" data-translate="company_name">Button Factory He Sheng</a> -->
+            <div class="nav-links">
+                <a href="index.html" class="nav-item active" data-translate="home">首页</a>
+                <a href="#" class="nav-item" data-translate="product_intro">产品介绍</a>
+                <a href="#" class="nav-item" data-translate="button_heart">钮心钮意</a>
+                <a href="#" class="nav-item" data-translate="button_market">DIY钮扣市集</a>
+                <a href="#" class="nav-item" data-translate="button_stories">钮扣物语</a>
+                <a href="about.html" class="nav-item" data-translate="about_hesheng">关于合盛</a>
+                <!-- 控制按钮已移到 top-right-controls -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <section class="hero-section">
+        <div class="hero-image">
+            <img src="assets/images/banner1.jpg" alt="合盛钮扣展示">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title" data-translate="company_name">合盛钮扣厂</h1>
+            <h1 class="hero-title">Button Factory He Sheng</h1>
+            <p class="hero-description" data-translate="company_slogan">匠心铸就品质 引领钮扣未来</p>
+        </div>
+    </section>
+
+    <section id="pickup" class="gallery-section">
+        <h2 class="section-title" data-translate="pickup_title">锦扣匠制</h2>
+        <h3 class="section-subtitle" data-translate="pickup_subtitle">PICK UP</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="assets/images/pickup1.jpg" alt="推荐产品 1" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup1_name">优雅金属扣</h3>
+                    <p data-translate="pickup1_desc">经典设计，永不过时。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/pickup2.jpg" alt="推荐产品 2" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup2_name">天然木质扣</h3>
+                    <p data-translate="pickup2_desc">环保材质，自然纹理。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/pickup3.jpg" alt="推荐产品 3" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup3_name">时尚树脂扣</h3>
+                    <p data-translate="pickup3_desc">色彩丰富，造型多样。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/pickup4.jpg" alt="推荐产品 4" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup4_name">复古贝壳扣</h3>
+                    <p data-translate="pickup4_desc">光泽独特，品味之选。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/pickup5.jpg" alt="推荐产品 5" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup5_name">珍珠母贝扣</h3>
+                    <p data-translate="pickup5_desc">自然光泽，高贵典雅。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/pickup6.jpg" alt="推荐产品 6" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup6_name">水晶玻璃扣</h3>
+                    <p data-translate="pickup6_desc">晶莹剔透，璀璨夺目。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/pickup7.jpg" alt="推荐产品 7" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup7_name">编织皮革扣</h3>
+                    <p data-translate="pickup7_desc">质感独特，时尚百搭。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/pickup8.jpg" alt="推荐产品 8" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup8_name">青铜复古扣</h3>
+                    <p data-translate="pickup8_desc">古韵悠长，岁月沉淀。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/pickup9.jpg" alt="推荐产品 9" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup9_name">彩绘陶瓷扣</h3>
+                    <p data-translate="pickup9_desc">手工绘制，独一无二。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/pickup10.jpg" alt="推荐产品 10" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup10_name">竹编纽扣</h3>
+                    <p data-translate="pickup10_desc">天然环保，清新雅致。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/pickup11.jpg" alt="推荐产品 11" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup11_name">琉璃宝石扣</h3>
+                    <p data-translate="pickup11_desc">色彩斑斓，富贵华丽。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/pickup12.jpg" alt="推荐产品 12" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="pickup12_name">镂空雕花扣</h3>
+                    <p data-translate="pickup12_desc">精致工艺，匠心独运。</p>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-more">
+            <a href="#" class="more-btn" data-translate="more_button">MORE</a>
+        </div>
+    </section>
+
+    <section id="new-product" class="gallery-section">
+        <h2 class="section-title" data-translate="new_product_title">最新产品</h2>
+        <h3 class="section-subtitle" data-translate="new_product_subtitle">NEW PRODUCT</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="assets/images/new1.jpg" alt="最新产品 1" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="newprod1_name">水晶镶嵌扣</h3>
+                    <p data-translate="newprod1_desc">闪耀夺目，点亮设计。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/new2.jpg" alt="最新产品 2" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="newprod2_name">皮革拼接扣</h3>
+                    <p data-translate="newprod2_desc">质感碰撞，个性十足。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/new3.jpg" alt="最新产品 3" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="newprod3_name">迷你系列扣</h3>
+                    <p data-translate="newprod3_desc">小巧精致，细节加分。</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/new4.jpg" alt="最新产品 4" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="newprod4_name">环保再生材料扣</h3>
+                    <p data-translate="newprod4_desc">可持续时尚的新选择。</p>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-more">
+            <a href="#" class="more-btn" data-translate="more_button">MORE</a>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+        <h2 class="section-title" data-translate="gallery_title">精工智造</h2>
+        <h3 class="section-subtitle" data-translate="gallery_subtitle">GALLERY</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="assets/images/gallery-long-1.jpg" alt="精工智造 长图1" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="gallery_item1_title">创意作品集锦</h3>
+                    </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/gallery-long-2.jpg" alt="精工智造 长图2" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="gallery_item2_title">匠心独运系列</h3>
+                    </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/gallery-long-3.jpg" alt="精工智造 长图3" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="gallery_item3_title">设计师合作款</h3>
+                    </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets/images/gallery-long-4.jpg" alt="精工智造 长图4" loading="lazy">
+                <div class="item-content">
+                    <h3 data-translate="gallery_item4_title">客户定制案例</h3>
+                    </div>
+            </div>
+        </div>
+        <div class="gallery-more">
+            <a href="#" class="more-btn" data-translate="more_button">MORE</a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content container">
+            <div class="footer-section">
+                <h3 data-translate="footer_about">关于</h3>
+                <ul>
+                    <li><a href="#" data-translate="footer_user_guide">用户指南</a></li>
+                    <li><a href="faq.html" data-translate="footer_faq">常见问题</a></li>
+                    <li><a href="contact.html" data-translate="footer_contact_us">询问</a></li>
+                    <li><a href="about.html" data-translate="footer_company_profile">公司简介</a></li>
+                    <li><a href="terms.html" data-translate="footer_tos">服务条款</a></li> 
+                    <li><a href="privacy.html" data-translate="footer_privacy">隐私政策</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-translate="footer_usage_rules">使用规则</h3>
+                <div class="company-info">
+                    <p data-translate="footer_company_name">合盛钮扣厂</p>
+                    <p data-translate="footer_address">广东省东莞市凤岗镇凤德岭凤鸣路36号</p>
+                    <p data-translate="footer_zip_phone">邮编: 523692</p>
+                    <p data-translate="footer_hours">营业时间: 07:00-21:00</p>
+                    <p data-translate="footer_closing_days">休息日：无休息日</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3 data-translate="footer_newsletter">订阅新闻通讯</h3>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="输入您的电子邮件地址" data-translate="newsletter_placeholder">
+                    <button type="submit" class="subscribe-btn" data-translate="newsletter_subscribe">登记</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <div class="payment-methods">
+                <span data-translate="payment_methods"></span>
+            </div>
+            <p class="copyright">©<span id="currentYear">2024</span> <span data-translate="company_name">合盛钮扣厂</span>. <span data-translate="all_rights_reserved">版权所有</span>.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script type="module">
+        // 等待模块加载完成
+        async function init() {
+            try {
+                console.log('Initializing application...');
+                
+                // 调用nav.js中的loadNavigation处理通用导航逻辑（如active类）
+                const { loadNavigation } = await import('./assets/js/nav.js');
+                // console.log('Navigation module loaded for active link setting');
+                await loadNavigation();
+                // console.log('Active link setting attempted by nav.js');
+
+                // 页面特定初始化：语言和主题
+                const { initializeLanguage, toggleLanguage } = await import('./assets/js/language.js');
+                const { initThemeSwitch } = await import('./assets/js/theme.js');
+
+                await initializeLanguage();
+                initThemeSwitch(); 
+                // console.log('Language and Theme initialized by page script');
+
+                const langToggle = document.getElementById('languageToggle');
+                if (langToggle) {
+                    // console.log('Found language toggle button in page, binding click event');
+                    langToggle.addEventListener('click', toggleLanguage);
+                } else {
+                    console.warn('Language toggle button not found in page script for index.html');
+                }
+            } catch (error) {
+                console.error('Error initializing:', error);
+            }
+        }
+
+        // 确保在DOM加载完成后初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "合盛钮扣厂",
+    "alternateName": "HeSheng Button Factory",
+    "url": "https://www.heshengbutton.com",
+    "logo": "assets/images/logo.png",
+    "description": "专业钮扣制造商，提供高品质、多样化的钮扣产品",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "凤德岭凤鸣路36号",
+        "addressLocality": "东莞市",
+        "addressRegion": "广东省",
+        "postalCode": "111-0053",
+        "addressCountry": "CN"
+    },
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "03-5833-5256",
+        "contactType": "customer service"
+    }
+}
+</script>
+</body>
+</html>
+
